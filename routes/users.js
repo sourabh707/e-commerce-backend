@@ -47,7 +47,7 @@ router.post('/log', async(req, res) => {
 
     try {
         const user = await User.findOne({ email: req.body.email });
-        const secret = process.env.secret;
+        const SECRET = process.env.SECRET;
         if (!user) {
           return res.status(404).send('User not found');
         }
@@ -55,7 +55,7 @@ router.post('/log', async(req, res) => {
         if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
             const token = jwt.sign({
                 userId : user.id
-            },secret, {
+            },SECRET, {
                 expireIn : '1d'
             })
           return res.status(200).send({user: user.email, token : token });

@@ -3,10 +3,10 @@ const expressJwt = require('express-jwt'); // Correct import
 const jwt = require('jsonwebtoken'); // Latest way to sign and verify JWT
 
 function authJwt() {
-    const secret = process.env.secret;
+    const SECRET = process.env.SECRET;
     const api = process.env.API_URL;
     return expressJwt({
-        secret,
+        SECRET,
         algorithms: ['HS256'],
         isRevoked: isRevoked
     }).unless({
